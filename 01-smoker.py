@@ -1,9 +1,9 @@
 """
-    This program listens for work messages contiously. 
-    Start multiple versions to add more workers.  
+    This program sends a message to a queue on the RabbitMQ server.
+    Make tasks harder/longer-running by adding dots at the end of the message.
 
-    Author: Denise Case
-    Date: January 15, 2023
+    Author: Jordan Woodson
+    Date: FEB 15, 2023
 
 """
 
@@ -19,7 +19,7 @@ def callback(ch, method, properties, body):
     """ Define behavior on getting a message.""" 
     # decode the binary message body to a string
     message = pickle.loads(body)
-    
+    print(message)
     # convert temp to number, then add to our stored results
     temp = float(message[1])
     ar.append((temp))

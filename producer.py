@@ -43,7 +43,7 @@ def send_message(host: str, queue_name: str, message: tuple):
         # messages will not be deleted until the consumer acknowledges
 
         msg=pickle.dumps(message)
-        
+
         #this is where we decide our message gets sent based on the que name
         if(queue_name == '01-smoker'):
             ch.queue_declare(queue="01-smoker", durable=True)
@@ -58,13 +58,14 @@ def send_message(host: str, queue_name: str, message: tuple):
             ch.basic_publish(exchange='', routing_key="03-food-B", body=msg, properties=pika.BasicProperties(delivery_mode=2))
 
 
-
+        
         
     except pika.exceptions.AMQPConnectionError as e:
         print(f"Error: Connection to RabbitMQ server failed: {e}")
         sys.exit(1)
     finally:
         # close the connection to the server
+        
         conn.close()
 
 # Standard Python idiom to indicate main program entry point
@@ -79,13 +80,15 @@ if __name__ == "__main__":
     # use the join method to convert the list of arguments into a string
     # join by the space character inside the quotes
     # message = " ".join(sys.argv[1:]) or "Second task....."
-    # Read data from file
+    # Read data from fil
+
+
 with open('smoker-temps.csv') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
-    i=0
+    
     fields=next(reader)
     for row in reader:
-
+        i=0
         # i = time
         # i+1 = smoker
         # 1+2 = food a
